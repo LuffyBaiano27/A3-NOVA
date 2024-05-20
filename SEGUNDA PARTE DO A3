@@ -1,0 +1,142 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class Registro {
+    private String nome;
+    private int idade;
+    private String email;
+    private String endereco;
+    private String telefone;
+    private String tipo;
+    private String documento;
+
+    public Registro(String nome, int idade, String email, String endereco, String telefone, String tipo, String documento) {
+        this.nome = nome;
+        this.idade = idade;
+        this.email = email;
+        this.endereco = endereco;
+        this.telefone = telefone;
+        this.tipo = tipo;
+        this.documento = documento;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(String documento) {
+        this.documento = documento;
+    }
+}
+
+public class Principal {
+    public static void main(String[] args) {
+        ArrayList<Registro> registros = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("1. Adicionar registro");
+            System.out.println("2. Mostrar registros");
+            System.out.println("3. Sair");
+            System.out.print("Escolha uma opção: ");
+            int opcao = scanner.nextInt();
+            scanner.nextLine(); 
+
+            switch (opcao) {
+                case 1:
+                    System.out.print("Seu Nome: ");
+                    String nome = scanner.nextLine();
+                    System.out.print("Sua Idade: ");
+                    int idade = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.print("Seu Email: ");
+                    String email = scanner.nextLine();
+                    System.out.print("Seu Endereço: ");
+                    String endereco = scanner.nextLine();
+                    System.out.print("Seu Telefone: ");
+                    String telefone = scanner.nextLine();
+                    System.out.print("você é Pj ou Pf? ( Pessoa Juridica ou Pessoa Fisica ): ");
+                    String tipo = scanner.nextLine();
+                    String documento;
+                    if (tipo.equalsIgnoreCase("PF")) {
+                        System.out.print("CPF: ");
+                        documento = scanner.nextLine();
+                    } else if (tipo.equalsIgnoreCase("PJ")) {
+                        System.out.print("CNPJ: ");
+                        documento = scanner.nextLine();
+                    } else {
+                        System.out.println("Tipo inválido!");
+                        continue;
+                    }
+
+                    Registro novoRegistro = new Registro(nome, idade, email, endereco, telefone, tipo, documento);
+                    registros.add(novoRegistro);
+                    break;
+                case 2:
+                    System.out.println("Registros:");
+                    System.out.println("-----------------------------------------------------------------------");
+                    System.out.printf("| %-10s | %-5s | %-17s | %-25s | %-12s | %-5s | %-12s |\n", "Nome", "Idade", "Email", "Endereço", "Telefone", "Tipo", "Documento");
+                    System.out.println("-----------------------------------------------------------------------");
+                    for (Registro registro : registros) {
+                        System.out.printf("| %-10s | %-2d | %-17s | %-25s | %-12s | %-5s | %-12s |\n", registro.getNome(), registro.getIdade(), registro.getEmail(), registro.getEndereco(), registro.getTelefone(), registro.getTipo(), registro.getDocumento());
+                    }
+                    System.out.println("-----------------------------------------------------------------------");
+                    break;
+                case 3:
+                    System.out.println("Boa e volte sempre!!");
+                    scanner.close();
+                    return;
+                default:
+                    System.out.println("Opção inválida!");
+            }
+        }
+    }
+}
