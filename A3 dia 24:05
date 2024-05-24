@@ -8,7 +8,7 @@ class Registro {
     private String endereco;
     private String telefone;
     private String tipo;
-    private String documento; 
+    private String documento;
 //essa classe composta de objetos strings e ints (int: numeros inteiros, strings: letras e nomes completos... ou seja como os cadastros são preenchidos.)
 
     public Registro(String nome, int idade, String email, String endereco, String telefone, String tipo, String documento) {
@@ -80,9 +80,17 @@ class Registro {
 // string plublica para classificar e puxar os documentos na hora dos cadastros...
 public class Principal {
     public static void main(String[] args) {
-        ArrayList<Registro> registros = new ArrayList<>();
+        ArrayList<Registro> registros = new ArrayList<Registro>();
         Scanner scanner = new Scanner(System.in);
 // aqui ja é classe Principal onde está os System prints, ou seja as opções que serão dadas para o usuario durante o uso do sistema.
+        registros.add(new Registro("Wellington",29, "wells@gmail.com", "Rua sla de onde", "71912345678", "PF", "123.456.789-00"));
+        registros.add(new Registro("Jorge Guilherme",24, "jorge_guil@hotmail.com.br", "Travessa Colômbia", "71982950914", "PF", "770.203.205-70"));
+        registros.add(new Registro("Luís Edson",25, "luis.ed@gmail.com", "4ª Travessa Isaias Gonçalves", "75996220022", "PJ", "80.743.850/0001-19"));
+        registros.add(new Registro("Thomas Calebe",35, "thomas.cal@hotmail.com.br", "Caminho 05-Núcleo", "71996717181", "PF", "049.839.735-16"));
+        registros.add(new Registro("Gabriela Maya",28, "gabriela_@live.dk", "Travessa Capitólio", "75992180821", "PJ", "76.492.878/0001-53"));
+        registros.add(new Registro("Liz Camila",50, "liz_rib@outlook.com.br", "Rua Pantaguaçu", "75999650127", "PF", "625.112.345-13"));
+        registros.add(new Registro("Carolina Rebeca",22, "caroli@bol.com.br", "Avenida Getúlio Vargas", "75988519905", "PJ", "55.531.896/0001-27"));
+
         while (true) {
             System.out.println("Para começar escolha um número abaixo.⭣");
             System.out.println("1. Adicionar registro");
@@ -90,7 +98,7 @@ public class Principal {
             System.out.println("3. Sair");
             System.out.print("Escolha uma opção: ");
             int opcao = scanner.nextInt();
-            scanner.nextLine(); 
+            scanner.nextLine();
 // case de cadastro, onde será realizado a inscrição de informações por parte do usuario que vai se cadastrar.
             switch (opcao) {
                 case 1:
@@ -122,17 +130,17 @@ public class Principal {
                     Registro novoRegistro = new Registro(nome, idade, email, endereco, telefone, tipo, documento);
                     registros.add(novoRegistro);
                     break;
-            // case tabular é onde está alocado a formatação para separar os cadastros feitos em formato de tabela.    
+// case tabular é onde está alocado a formatação para separar os cadastros feitos em formato de tabela.    
                 case 2:
                     System.out.println("Registros:");
                     System.out.println("-------------------------------------------------------------------------------------------------------------------------------");
-                    System.out.printf("| %-20s | %-4s | %-19s | %-25s | %-12s | %-4s | %-14s |\n", "Nome", "Idade", "Email", "Endereço", "Telefone", "Tipo", "Documento");
+                    System.out.printf("| %-10s | %-4s | %-10s | %-10s | %-10s | %-4s | %-10s |\n", "Nome", "Idade", "Email", "Endereço", "Telefone", "Tipo", "Documento");
                     for (Registro registro : registros) {
-                        System.out.printf("| %-20s | %-5d | %-19s | %-25s | %-12s | %-4s | %-14s |\n", registro.getNome(), registro.getIdade(), registro.getEmail(), registro.getEndereco(), registro.getTelefone(), registro.getTipo(), registro.getDocumento());
+                        System.out.printf("| %-10s | %-4d | %-10s | %-10s | %-10s | %-4s | %-10s |\n", registro.getNome(), registro.getIdade(), registro.getEmail(), registro.getEndereco(), registro.getTelefone(), registro.getTipo(), registro.getDocumento());
                     }
                     System.out.println("-------------------------------------------------------------------------------------------------------------------------------");
                     break;
-            // case de erro, rodapé e " assinaturas " ( totalmente opcional nosso ), aq está para se o usuario escrever uma opção invalida e se caso tudo certo ao final do programa irá aparecer as assinaturas.  
+// case de erro, rodapé e " assinaturas " ( totalmente opcional nosso ), aq está para se o usuario escrever uma opção invalida e se caso tudo certo ao final do programa irá aparecer as assinaturas.  
                 case 3:
                     System.out.println("DESENVOLVIDO E CRIADO POR @Luffy @VidroPort @ordep @SyzerDev @IronMan :D  ('') ");
                     scanner.close();
