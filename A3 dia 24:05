@@ -142,7 +142,7 @@ public class Principal {
                     break;
 // case de erro, rodapé e " assinaturas " ( totalmente opcional nosso ), aq está para se o usuario escrever uma opção invalida e se caso tudo certo ao final do programa irá aparecer as assinaturas.  
                 case 3:
-                    System.out.println("DESENVOLVIDO E CRIADO POR @Luffy @VidroPort @ordep @SyzerDev @IronMan :D  ('') ");
+                    System.out.println("DESENVOLVIDO E CRIADO POR @LuffyBaiano @VidroPort @ordep @SyzerDev @IronMan :D  ('') ");
                     scanner.close();
                     return;
                 default:
