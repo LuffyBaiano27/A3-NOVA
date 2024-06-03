@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-
+// principal parte do codigo que é oq permite fazer,guardar,escrever e manter os registros.
 class Registro {
     private String nome;
     private int idade;
@@ -76,7 +76,7 @@ class Registro {
         this.documento = documento;
     }
 }
-
+// registros pré incluidos e as opções que o usuario tera disponivel
 public class Principal {
     public static void main(String[] args) {
         ArrayList<Registro> registros = new ArrayList<Registro>();
@@ -123,7 +123,7 @@ public class Principal {
             }
         }
     }
-
+// aq é referente sobre oque o usuario tera que digitar no registro dele(a)
     private static void adicionarRegistro(Scanner scanner, ArrayList<Registro> registros) {
         System.out.print("Seu Nome: ");
         String nome = scanner.nextLine();
@@ -153,7 +153,7 @@ public class Principal {
         Registro novoRegistro = new Registro(nome, idade, email, endereco, telefone, tipo, documento);
         registros.add(novoRegistro);
     }
-
+// aba de tabelamento ( somente para organizar os registros em tabela )
     private static void mostrarRegistros(ArrayList<Registro> registros) {
         System.out.println("Registros:");
         System.out.println("-------------------------------------------------------------------------------------------------------------------------------");
@@ -163,7 +163,7 @@ public class Principal {
         }
         System.out.println("-------------------------------------------------------------------------------------------------------------------------------");
     }
-
+// aba referente a edição e exclusão de registro... ( foi incluida depois )
     private static void editarRegistro(Scanner scanner, ArrayList<Registro> registros) {
         System.out.print("Digite o nome do registro que deseja alterar: ");
         String nome = scanner.nextLine();
