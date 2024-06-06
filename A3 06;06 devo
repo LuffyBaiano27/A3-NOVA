@@ -1,0 +1,236 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+// uma das classes principais essa se trata dos registros é a parte do codigo que é oq permite fazer,guardar,escrever e manter os registros.
+class Registro {
+    private String nome;
+    private int idade;
+    private String email;
+    private String endereco;
+    private String telefone;
+    private String tipo;
+    private String documento;
+
+    public Registro(String nome, int idade, String email, String endereco, String telefone, String tipo, String documento) {
+        this.nome = nome;
+        this.idade = idade;
+        this.email = email;
+        this.endereco = endereco;
+        this.telefone = telefone;
+        this.tipo = tipo;
+        this.documento = documento;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(String documento) {
+        this.documento = documento;
+    }
+}
+// segunda classe principal que puxa a main, a lista de argumentos, os registros pré-cadastrados e as opções para interação do usuário. 
+public class Principal {
+    public static void main(String[] args) {
+        ArrayList<Registro> registros = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+
+        registros.add(new Registro("Wellington",29, "wells@gmail.com", "Rua sla de onde", "71912345678", "PF", "123.456.789-00"));
+        registros.add(new Registro("Jorge Guilherme",24, "jorge_guil@hotmail.com.br", "Travessa Colômbia", "71982950914", "PF", "770.203.205-70"));
+        registros.add(new Registro("Luís Edson",25, "luis.ed@gmail.com", "4ª Travessa Isaias Gonçalves", "75996220022", "PJ", "80.743.850/0001-19"));
+        registros.add(new Registro("Thomas Calebe",35, "thomas.cal@hotmail.com.br", "Caminho 05-Núcleo", "71996717181", "PF", "049.839.735-16"));
+        registros.add(new Registro("Gabriela Maya",28, "gabriela_@live.dk", "Travessa Capitólio", "71992180821", "PJ", "76.492.878/0001-53"));
+        registros.add(new Registro("Liz Camila",50, "liz_rib@outlook.com.br", "Rua Pantaguaçu", "71999650127", "PF", "625.112.345-13"));
+        registros.add(new Registro("Carolina Rebeca",22, "caroli@bol.com.br", "Avenida Getúlio Vargas", "71988519905", "PJ", "55.531.896/0001-27"));
+
+        while (true) {
+            System.out.println("Para começar escolha um número abaixo.⭣");
+            System.out.println("1. Adicionar registro");
+            System.out.println("2. Mostrar registros");
+            System.out.println("3. Pesquisar registro por nome");
+            System.out.println("4. Editar registro");
+            System.out.println("5. Excluir registro");
+            System.out.println("6. Sair");
+            System.out.print("Escolha uma opção: ");
+            int opcao = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (opcao) {
+                case 1:
+                    adicionarRegistro(scanner, registros);
+                    break;
+                case 2:
+                    mostrarRegistros(registros);
+                    break;
+                case 3:
+                    pesquisarRegistro(scanner, registros);
+                    break;
+                case 4:
+                    editarRegistro(scanner, registros);
+                    break;
+                case 5:
+                    excluirRegistro(scanner, registros);
+                    break;
+                case 6:
+                    System.out.println("DESENVOLVIDO E CRIADO POR @joaomarcelo2709 @VidroPort @pedro @SyzerDev @IronMan :D  ('') ");
+                    scanner.close();
+                    return;
+                default:
+                    System.out.println("ERRO DE DIGITAÇÃO CONSAGRADO(A)...");
+            }
+        }
+    }
+// classe decedente da main que da abertura para o usuário escrever os dados do registro.
+    private static void adicionarRegistro(Scanner scanner, ArrayList<Registro> registros) {
+        System.out.print("Seu Nome: ");
+        String nome = scanner.nextLine();
+        System.out.print("Sua Idade: ");
+        int idade = scanner.nextInt();
+        scanner.nextLine();
+        System.out.print("Seu Email: ");
+        String email = scanner.nextLine();
+        System.out.print("Seu Endereço: ");
+        String endereco = scanner.nextLine();
+        System.out.print("Seu Telefone: ");
+        String telefone = scanner.nextLine();
+        System.out.print("você é Pj ou Pf? ( Pessoa Juridica ou Pessoa Fisica ): ");
+        String tipo = scanner.nextLine();
+        String documento;
+        if (tipo.equalsIgnoreCase("PF")) {
+            System.out.print("CPF: ");
+            documento = scanner.nextLine();
+        } else if (tipo.equalsIgnoreCase("PJ")) {
+            System.out.print("CNPJ: ");
+            documento = scanner.nextLine();
+        } else {
+            System.out.println("Tipo inválido!");
+            return;
+        }
+
+        Registro novoRegistro = new Registro(nome, idade, email, endereco, telefone, tipo, documento);
+        registros.add(novoRegistro);
+    }
+// classe que mostra a estilização tabular da lista de registro.
+    private static void mostrarRegistros(ArrayList<Registro> registros) {
+        System.out.println("Registros:");
+        System.out.println("-------------------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("| %-10s | %-4s | %-10s | %-10s | %-10s | %-4s | %-10s |\n", "Nome", "Idade", "Email", "Endereço", "Telefone", "Tipo", "Documento");
+        for (Registro registro : registros) {
+            System.out.printf("| %-10s | %-4d | %-10s | %-10s | %-10s | %-4s | %-10s |\n", registro.getNome(), registro.getIdade(), registro.getEmail(), registro.getEndereco(), registro.getTelefone(), registro.getTipo(), registro.getDocumento());
+        }
+        System.out.println("-------------------------------------------------------------------------------------------------------------------------------");
+    }
+// edição de registro onde possibilita o usuário lançar novas informações.
+    private static void editarRegistro(Scanner scanner, ArrayList<Registro> registros) {
+        System.out.print("Digite o nome do registro que deseja alterar: ");
+        String nome = scanner.nextLine();
+        Registro registro = encontrarRegistroPorNome(registros, nome);
+        if (registro == null) {
+            System.out.println("Achei esse registro não...");
+            return;
+        }
+        System.out.print("Novo Nome: ");
+        registro.setNome(scanner.nextLine());
+        System.out.print("Nova Idade: ");
+        registro.setIdade(scanner.nextInt());
+        scanner.nextLine();
+        System.out.print("Novo Email: ");
+        registro.setEmail(scanner.nextLine());
+        System.out.print("Novo Endereço: ");
+        registro.setEndereco(scanner.nextLine());
+        System.out.print("Novo Telefone: ");
+        registro.setTelefone(scanner.nextLine());
+        System.out.print("Novo Tipo (PF/PJ): ");
+        String tipo = scanner.nextLine();
+        if (tipo.equalsIgnoreCase("PF")) {
+            System.out.print("Novo CPF: ");
+            registro.setDocumento(scanner.nextLine());
+        } else if (tipo.equalsIgnoreCase("PJ")) {
+            System.out.print("Novo CNPJ: ");
+            registro.setDocumento(scanner.nextLine());
+        } else {
+            System.out.println("Tipo Desconhecido...");
+        }
+    }
+// responsavel pela exclusão de determinados registros.
+    private static void excluirRegistro(Scanner scanner, ArrayList<Registro> registros) {
+        System.out.print("Digite o nome do registro que deseja excluir: ");
+        String nome = scanner.nextLine();
+        Registro registro = encontrarRegistroPorNome(registros, nome);
+        if (registro == null) {
+            System.out.println("Registro Desconhecido...");
+            return;
+        }
+        registros.remove(registro);
+        System.out.println("Registro excluido com sucesso!! :D.");
+    }
+// responsavel pela pesquisa de registros especificos ( por nome )
+    private static void pesquisarRegistro(Scanner scanner, ArrayList<Registro> registros) {
+        System.out.print("Digite o nome do registro que deseja pesquisar: ");
+        String nome = scanner.nextLine();
+        Registro registro = encontrarRegistroPorNome(registros, nome);
+        if (registro == null) {
+            System.out.println("Registro não encontrado...");
+        } else {
+            System.out.println("Aqui está o registro pesquisado:");
+            System.out.printf("| %-10s | %-4s | %-10s | %-10s | %-10s | %-4s | %-10s |\n", "Nome", "Idade", "Email", "Endereço", "Telefone", "Tipo", "Documento");
+            System.out.printf("| %-10s | %-4d | %-10s | %-10s | %-10s | %-4s | %-10s |\n", registro.getNome(), registro.getIdade(), registro.getEmail(), registro.getEndereco(), registro.getTelefone(), registro.getTipo(), registro.getDocumento());
+        }
+    }
+// aqui ele vai retornar o registro que foi pesquisado pelo usuario
+    private static Registro encontrarRegistroPorNome(ArrayList<Registro> registros, String nome) {
+        for (Registro registro : registros) {
+            if (registro.getNome().equalsIgnoreCase(nome)) {
+                return registro;
+            }
+        }
+        return null;
+    }
+}
