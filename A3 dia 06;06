@@ -86,9 +86,9 @@ public class Principal {
         registros.add(new Registro("Jorge Guilherme",24, "jorge_guil@hotmail.com.br", "Travessa Colômbia", "71982950914", "PF", "770.203.205-70"));
         registros.add(new Registro("Luís Edson",25, "luis.ed@gmail.com", "4ª Travessa Isaias Gonçalves", "75996220022", "PJ", "80.743.850/0001-19"));
         registros.add(new Registro("Thomas Calebe",35, "thomas.cal@hotmail.com.br", "Caminho 05-Núcleo", "71996717181", "PF", "049.839.735-16"));
-        registros.add(new Registro("Gabriela Maya",28, "gabriela_@live.dk", "Travessa Capitólio", "75992180821", "PJ", "76.492.878/0001-53"));
-        registros.add(new Registro("Liz Camila",50, "liz_rib@outlook.com.br", "Rua Pantaguaçu", "75999650127", "PF", "625.112.345-13"));
-        registros.add(new Registro("Carolina Rebeca",22, "caroli@bol.com.br", "Avenida Getúlio Vargas", "75988519905", "PJ", "55.531.896/0001-27"));
+        registros.add(new Registro("Gabriela Maya",28, "gabriela_@live.dk", "Travessa Capitólio", "71992180821", "PJ", "76.492.878/0001-53"));
+        registros.add(new Registro("Liz Camila",50, "liz_rib@outlook.com.br", "Rua Pantaguaçu", "71999650127", "PF", "625.112.345-13"));
+        registros.add(new Registro("Carolina Rebeca",22, "caroli@bol.com.br", "Avenida Getúlio Vargas", "71988519905", "PJ", "55.531.896/0001-27"));
 
         while (true) {
             System.out.println("Para começar escolha um número abaixo.⭣");
@@ -115,7 +115,7 @@ public class Principal {
                     excluirRegistro(scanner, registros);
                     break;
                 case 5:
-                    System.out.println("DESENVOLVIDO E CRIADO POR @LuffyBaiano @VidroPort @ordep @SyzerDev @IronMan :D  ('') ");
+                    System.out.println("DESENVOLVIDO E CRIADO POR @joaomarcelo2709 @VidroPort @pedro @SyzerDev @IronMan :D  ('') ");
                     scanner.close();
                     return;
                 default:
