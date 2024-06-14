@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicativo de Registros</title>
+    <style>
+        body {
+            background-color: #191970; /* Azul da meia-noite */
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #000; /* Preto */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            text-align: center;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option {
+            background-color: #000080; /* Azul da meia-noite mais escuro */
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .option:hover {
+            background-color: #0000CD; /* Azul da meia-noite mais claro */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Aplicativo de Registros</h1>
+    <div class="options">
+        <div class="option" onclick="adicionarRegistro()">Adicionar Registro</div>
+        <div class="option" onclick="mostrarRegistros()">Mostrar Registros</div>
+        <div class="option" onclick="pesquisarRegistro()">Pesquisar Registro por Nome</div>
+        <div class="option" onclick="editarRegistro()">Editar Registro</div>
+        <div class="option" onclick="excluirRegistro()">Excluir Registro</div>
+        <div class="option" onclick="sair()">Sair</div>
+    </div>
+</div>
+
+<script>
+    // Array para armazenar os registros
+    let registros = [];
+
+    // Função para adicionar registro
+    function adicionarRegistro() {
+        let nome = prompt('Seu Nome:');
+        let idade = parseInt(prompt('Sua Idade:'));
+        let email = prompt('Seu Email:');
+        let endereco = prompt('Seu Endereço:');
+        let telefone = prompt('Seu Telefone:');
+        let tipo = prompt('Você é PJ ou PF? (Pessoa Jurídica ou Pessoa Física):');
+        let documento;
+        if (tipo.toUpperCase() === 'PF') {
+            documento = prompt('CPF:');
+        } else if (tipo.toUpperCase() === 'PJ') {
+            documento = prompt('CNPJ:');
+        } else {
+            alert('Tipo inválido!');
+            return;
+        }
+
+        let novoRegistro = new Registro(nome, idade, email, endereco, telefone, tipo, documento);
+        registros.push(novoRegistro);
+
+        alert('Registro adicionado com sucesso!');
+    }
+
+    // Função para mostrar registros
+    function mostrarRegistros() {
+        let registrosString = '';
+        for (let i = 0; i < registros.length; i++) {
+            registrosString += 'Nome: ' + registros[i].nome + ', Idade: ' + registros[i].idade + ', Email: ' + registros[i].email + ', Endereço: ' + registros[i].endereco + ', Telefone: ' + registros[i].telefone + ', Tipo: ' + registros[i].tipo + ', Documento: ' + registros[i].documento + '\n';
+        }
+        alert('Registros:\n' + registrosString);
+    }
+
+    // Função para pesquisar registro por nome
+    function pesquisarRegistro() {
+        let nome = prompt('Digite o nome do registro que deseja pesquisar:');
+        let registroEncontrado = null;
+        for (let i = 0; i < registros.length; i++) {
+            if (registros[i].nome.toLowerCase() === nome.toLowerCase()) {
+                registroEncontrado = registros[i];
+                break;
+            }
+        }
+        if (registroEncontrado) {
+            alert('Registro encontrado:\nNome: ' + registroEncontrado.nome + ', Idade: ' + registroEncontrado.idade + ', Email: ' + registroEncontrado.email + ', Endereço: ' + registroEncontrado.endereco + ', Telefone: ' + registroEncontrado.telefone + ', Tipo: ' + registroEncontrado.tipo + ', Documento: ' + registroEncontrado.documento);
+        } else {
+            alert('Registro não encontrado.');
+        }
+    }
+
+    // Função para editar registro
+    function editarRegistro() {
+        let nome = prompt('Digite o nome do registro que deseja editar:');
+        let registroEncontrado = null;
+        for (let i = 0; i < registros.length; i++) {
+            if (registros[i].nome.toLowerCase() === nome.toLowerCase()) {
+                registroEncontrado = registros[i];
+                break;
+            }
+        }
+        if (registroEncontrado) {
+            // Solicitar novos dados
+            let novosDados = {};
+            novosDados.nome = prompt('Novo Nome:', registroEncontrado.nome);
+            novosDados.idade = parseInt(prompt('Nova Idade:', registroEncontrado.idade));
+            novosDados.email = prompt('Novo Email:', registroEncontrado.email);
+            novosDados.endereco = prompt('Novo Endereço:', registroEncontrado.endereco);
+            novosDados.telefone = prompt('Novo Telefone:', registroEncontrado.telefone);
+            novosDados.tipo = prompt('Novo Tipo (PF/PJ):', registroEncontrado.tipo);
+            if (novosDados.tipo.toUpperCase() === 'PF') {
+                novosDados.documento = prompt('Novo CPF:', registroEncontrado.documento);
+            } else if (novosDados.tipo.toUpperCase() === 'PJ') {
+                novosDados.documento = prompt('Novo CNPJ:', registroEncontrado.documento);
+            } else {
+                alert('Tipo inválido!');
+                return;
+            }
+
+            // Atualizar registro
+            registroEncontrado.nome = novosDados.nome;
+            registroEncontrado.idade = novosDados.idade;
+            registroEncontrado.email = novosDados.email;
+            registroEncontrado.endereco = novosDados.endereco;
+            registroEncontrado.telefone = novosDados.telefone;
+            registroEncontrado.tipo = novosDados.tipo;
+            registroEncontrado.documento = novosDados.documento;
+
+            alert('Registro editado com sucesso!');
+        } else {
+            alert('Registro não encontrado.');
+        }
+    }
+
+    // Função para excluir registro
+    function excluirRegistro() {
+        let nome = prompt('Digite o nome do registro que deseja excluir:');
+        let index = -1;
+        for (let i = 0; i < registros.length; i++) {
+            if (registros[i].nome.toLowerCase() === nome.toLowerCase()) {
+                index = i;
+                break;
+            }
+        }
+        if (index !== -1) {
+            registros.splice(index, 1);
+            alert('Registro excluído com sucesso!');
+        } else {
+            alert('Registro não encontrado.');
+        }
+    }
+
+    // Função para sair
+    function sair() {
+        alert('Saindo do aplicativo...');
+        // Implemente a função de sair do aplicativo aqui
+    }
+
+    // Definindo a classe Registro
+    class Registro {
+        constructor(nome, idade, email, endereco, telefone, tipo, documento) {
+            this.nome = nome;
+            this.idade = idade;
+            this.email = email;
+            this.endereco = endereco;
+            this.telefone = telefone;
+            this.tipo = tipo;
+            this.documento = documento;
+        }
+    }
+
+    // Registros pré-definidos para testes
+    registros.push(new Registro("Wellington", 29, "wells@gmail.com", "Rua sla de onde", "71912345678", "PF", "123.456.789-00"));
+    registros.push(new Registro("Jorge Guilherme", 24, "jorge_guil@hotmail.com.br", "Travessa Colômbia", "71982950914", "PF", "770.203.205-70"));
+    registros.push(new Registro("Luís Edson", 25, "luis.ed@gmail.com", "4ª Travessa Isaias Gonçalves", "75996220022", "PJ", "80.743.850/0001-19"));
+    registros.push(new Registro("Thomas Calebe", 35, "thomas.cal@hotmail.com.br", "Caminho 05-Núcleo", "71996717181", "PF", "049.839.735-16"));
+    registros.push(new Registro("Gabriela Maya", 28, "gabriela_@live.dk", "Travessa Capitólio", "71992180821", "PJ", "76.492.878/0001-53"));
+    registros.push(new Registro("Liz Camila", 50, "liz_rib@outlook.com.br", "Rua Pantaguaçu", "71999650127", "PF", "625.112.345-13"));
+    registros.push(new Registro("Carolina Rebeca", 22, "caroli@bol.com.br", "Avenida Getúlio Vargas", "71988519905", "PJ", "55.531.896/0001-27"));
+</script>
+
+</body>
+</html>
